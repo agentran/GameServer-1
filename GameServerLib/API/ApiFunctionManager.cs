@@ -115,6 +115,10 @@ namespace LeagueSandbox.GameServer.API
         {
             return _game.Map.NavGrid.IsWalkable(x, y);
         }
+        public static bool IsBush(float x, float y)
+        {
+            return _game.Map.NavGrid.IsBush(x, y);
+        }
 
         public static void AddBuff(string buffName, float duration, byte stacks, BuffType buffType, IObjAiBase onto, IObjAiBase from)
         {

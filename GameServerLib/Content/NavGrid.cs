@@ -343,9 +343,22 @@ namespace LeagueSandbox.GameServer.Content
             return cell != null && !cell.HasFlag(this, NavigationGridCellFlags.NOT_PASSABLE);
         }
 
+        public bool IsBush(Vector2 coords)
+        {
+            var vector = TranslateToNavGrid(new Vector<float> { X = coords.X, Y = coords.Y });
+            var cell = GetCell((short)vector.X, (short)vector.Y);
+
+            return cell != null && cell.HasFlag(this, NavigationGridCellFlags.HAS_GRASS);
+        }
+
         public bool IsWalkable(float x, float y)
         {
             return IsWalkable(new Vector2(x, y));
+        }
+
+        public bool IsBush(float x, float y)
+        {
+            return IsBush(new Vector2(x, y));
         }
 
         public bool IsBrush(Vector2 coords)

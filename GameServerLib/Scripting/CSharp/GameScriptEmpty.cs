@@ -7,6 +7,7 @@ namespace LeagueSandbox.GameServer.Scripting.CSharp
     {
         public void OnActivate(IChampion owner)
         {
+
         }
 
         public void OnDeactivate(IChampion owner)

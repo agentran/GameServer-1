@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LeagueSandbox.GameServer</RootNamespace>
     <AssemblyName>GameServerLib</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -271,6 +271,9 @@
     <Compile Include="Logging\LoggerProvider.cs" />
     <Compile Include="Maps\Map.cs" />
     <Compile Include="ObjectManager.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Packets\NetworkIdManager.cs" />
     <Compile Include="Attributes\DisabledHandlerAttribute.cs" />
     <Compile Include="Packets\PacketHandlers\HandleCursorPositionOnWorld.cs" />
@@ -320,8 +323,82 @@
     <Compile Include="ServerLibDefiningAssembly.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\CommandLine.dll" />
+    <Content Include="bin\Debug\CommandLine.xml" />
+    <Content Include="bin\Debug\Crc32.NET.dll" />
+    <Content Include="bin\Debug\Crc32.NET.xml" />
+    <Content Include="bin\Debug\ENetCS.dll" />
+    <Content Include="bin\Debug\GameMaths.dll" />
+    <Content Include="bin\Debug\GameMaths.pdb" />
+    <Content Include="bin\Debug\GameServerCore.dll" />
+    <Content Include="bin\Debug\GameServerCore.pdb" />
+    <Content Include="bin\Debug\GameServerLib.dll" />
+    <Content Include="bin\Debug\GameServerLib.pdb" />
+    <Content Include="bin\Debug\Log4Net.Async.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\log4net.xml" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.CSharp.Scripting.xml" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.CSharp.xml" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.Scripting.xml" />
+    <Content Include="bin\Debug\Microsoft.CodeAnalysis.xml" />
+    <Content Include="bin\Debug\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\PacketDefinitions420.dll" />
+    <Content Include="bin\Debug\PacketDefinitions420.pdb" />
+    <Content Include="bin\Debug\RoyT.AStar.dll" />
+    <Content Include="bin\Debug\RoyT.AStar.xml" />
+    <Content Include="bin\Debug\System.AppContext.dll" />
+    <Content Include="bin\Debug\System.Collections.Immutable.dll" />
+    <Content Include="bin\Debug\System.Collections.Immutable.xml" />
+    <Content Include="bin\Debug\System.Console.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.xml" />
+    <Content Include="bin\Debug\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\Debug\System.Globalization.Calendars.dll" />
+    <Content Include="bin\Debug\System.IO.Compression.dll" />
+    <Content Include="bin\Debug\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\Debug\System.IO.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\Debug\System.Net.Http.dll" />
+    <Content Include="bin\Debug\System.Net.Sockets.dll" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Debug\System.Reflection.dll" />
+    <Content Include="bin\Debug\System.Reflection.Metadata.dll" />
+    <Content Include="bin\Debug\System.Reflection.Metadata.xml" />
+    <Content Include="bin\Debug\System.Runtime.dll" />
+    <Content Include="bin\Debug\System.Runtime.Extensions.dll" />
+    <Content Include="bin\Debug\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\Debug\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\Debug\System.Threading.Thread.dll" />
+    <Content Include="bin\Debug\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\Debug\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\Debug\System.Xml.XPath.dll" />
+    <Content Include="bin\Debug\System.Xml.XPath.XDocument.dll" />
+    <Content Include="obj\Debug\GameServerLib.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\GameServerLib.dll" />
+    <Content Include="obj\Debug\GameServerLib.pdb" />
     <None Include="app.config" />
     <Content Include="GameServer.Core.GPL.txt" />
+    <None Include="bin\Debug\GameServerLib.dll.config" />
+    <None Include="bin\Debug\PacketDefinitions420.dll.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\GameServerLib.csproj.CopyComplete" />
+    <None Include="obj\Debug\GameServerLib.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\GameServerLib.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +424,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
