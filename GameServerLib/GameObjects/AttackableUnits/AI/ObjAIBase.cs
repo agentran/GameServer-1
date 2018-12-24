@@ -32,7 +32,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
 
         public List<ISpellData> maxAAAnimations;
-        public uint i;
+        
         Random animationCycler;
 
 
@@ -83,25 +83,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
             Stats.CurrentMana = stats.ManaPoints.Total;
             Stats.CurrentHealth = stats.HealthPoints.Total;
-            animationCycler = new Random();
-            maxAAAnimations = new List<ISpellData>();
-            i = 2;
-            maxAAAnimations.Add(_game.Config.ContentManager.GetSpellData(model + "BasicAttack"));
-            while (_game.Config.ContentManager.GetSpellData(model + "BasicAttack" + i) != null)
-            {
-                try
-                {
-                    i++;
-                    maxAAAnimations.Add(_game.Config.ContentManager.GetSpellData(model + "BasicAttack" + i));
-
-                }
-                catch (ContentNotFoundException)
-                {
-                    Console.WriteLine("Number Of Animations - " + maxAAAnimations.Count());
-                    break;
-                }
-                break;
-            }
+           
 
             if (!string.IsNullOrEmpty(model))
             {
@@ -112,6 +94,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
             }
             else
             {
+                
                 AutoAttackDelay = 0;
                 AutoAttackProjectileSpeed = 500;
                 IsMelee = true;
@@ -122,6 +105,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
             BuffsLock = new object();
             Buffs = new Dictionary<string, IBuff>();
             IsDashing = false;
+            LoadAnimationAA();
         }
 
         public void AddBuffGameScript(string buffNamespace, string buffClass, ISpell ownerSpell, float removeAfter = -1f, bool isUnique = false)
@@ -387,7 +371,6 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
         /// </summary>
         public virtual void AutoAttackHit(IAttackableUnit target)
         {
-            UpdateAAanimation();
             if (HasCrowdControl(CrowdControlType.BLIND))
             {
                 target.TakeDamage(this, 0, DamageType.DAMAGE_TYPE_PHYSICAL,
@@ -442,9 +425,12 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
                 }
                 else if (IsAttacking && AutoAttackTarget != null)
                 {
+                    UpdateAAanimation();
+                    ISpell AASpell = AaSpellData as Spell;
                     _autoAttackCurrentDelay += diff / 1000.0f;
                     if (_autoAttackCurrentDelay >= AutoAttackDelay / Stats.AttackSpeedMultiplier.Total)
                     {
+                        
                         if (!IsMelee)
                         {
                             var p = new Projectile(
@@ -454,7 +440,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
                                 5,
                                 this,
                                 AutoAttackTarget,
-                                null,
+                                AASpell,
                                 AutoAttackProjectileSpeed,
                                 "",
                                 0,
@@ -537,12 +523,44 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
         public void UpdateAAanimation()
         {
+            
             int newAttackAnim = animationCycler.Next(0, maxAAAnimations.Count);
             AaSpellData = maxAAAnimations[newAttackAnim];
-            AutoAttackDelay = AaSpellData.CastFrame / 30.0f;
-            AutoAttackProjectileSpeed = AaSpellData.MissileSpeed;
+            if (!IsMelee)
+            {
+                AutoAttackDelay = AaSpellData.CastFrame / 30.0f;
+                AutoAttackProjectileSpeed = AaSpellData.MissileSpeed;
+            }
+            else
+            {
+                AutoAttackDelay = 0;
+                AutoAttackProjectileSpeed = 500;
+            }
             Console.WriteLine("Playing Animation - " + AaSpellData.AlternateName);
 
+        }
+
+        public void LoadAnimationAA()
+        {
+            animationCycler = new Random();
+            maxAAAnimations = new List<ISpellData>();
+            uint Counter = 2;
+            maxAAAnimations.Add(_game.Config.ContentManager.GetSpellData(this.Model + "BasicAttack"));
+            while (_game.Config.ContentManager.GetSpellData(this.Model + "BasicAttack" + Counter) != null)
+            {
+                try
+                {
+                    Counter++;
+                    maxAAAnimations.Add(_game.Config.ContentManager.GetSpellData(this.Model + "BasicAttack" + Counter));
+
+                }
+                catch (ContentNotFoundException)
+                {
+                    Console.WriteLine("Number Of Animations - " + maxAAAnimations.Count());
+                    break;
+                }
+                break;
+            }
         }
 
         public override void Update(float diff)
