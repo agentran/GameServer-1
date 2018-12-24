@@ -426,7 +426,6 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
                 else if (IsAttacking && AutoAttackTarget != null)
                 {
                     UpdateAAanimation();
-                    ISpell AASpell = AaSpellData as Spell;
                     _autoAttackCurrentDelay += diff / 1000.0f;
                     if (_autoAttackCurrentDelay >= AutoAttackDelay / Stats.AttackSpeedMultiplier.Total)
                     {
@@ -440,7 +439,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
                                 5,
                                 this,
                                 AutoAttackTarget,
-                                AASpell,
+                                null,
                                 AutoAttackProjectileSpeed,
                                 "",
                                 0,
