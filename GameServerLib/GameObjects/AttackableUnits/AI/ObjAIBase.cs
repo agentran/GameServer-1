@@ -42,7 +42,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
         public IAttackableUnit TargetUnit { get; set; }
         public IAttackableUnit AutoAttackTarget { get; set; }
         public CharData CharData { get; }
-        public ISpellData AaSpellData { get; }
+        public ISpellData AaSpellData { get; set; }
         private bool _isNextAutoCrit;
         public float AutoAttackDelay { get; set; }
         public float AutoAttackProjectileSpeed { get; set; }
