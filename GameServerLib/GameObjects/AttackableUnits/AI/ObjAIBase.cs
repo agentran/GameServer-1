@@ -57,9 +57,9 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
         public bool IsMelee { get; set; }
         public bool IsDashing { get; protected set; }
 
-        private float AABuff;
-        private float forHowMany;
-        private DamageType typeAABuff;
+        //private float AABuff;
+        //private float forHowMany;
+       // private DamageType typeAABuff;
 
         private Random _random = new Random();
 
@@ -391,7 +391,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
             var onAutoAttack = _scriptEngine.GetStaticMethod<Action<IAttackableUnit, IAttackableUnit>>(Model, "Passive", "OnAutoAttack");
             onAutoAttack?.Invoke(this, target);
-            if (AABuff != 0)
+            /*if (AABuff != 0) //DIRTYBuffAdding
             {
                 for (int CurrectAA = 0; CurrectAA < forHowMany; CurrectAA++)
                 {
@@ -403,25 +403,14 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
             }
             else
-            {
+            {*/
                 target.TakeDamage(this, damage, DamageType.DAMAGE_TYPE_PHYSICAL,
                    DamageSource.DAMAGE_SOURCE_ATTACK,
                    _isNextAutoCrit);
-            }
+            //}
         }
 
-        public void AutoAttackBuff(float damageBuff, float forHowManyAA, DamageType type)
-        {
-            AABuff = damageBuff;
-            forHowMany = forHowManyAA;
-            typeAABuff = type;
-        }
-        public void RemoveAABuff()
-        {
-            AABuff = 0;
-            forHowMany = 0;
-        }
-
+        
         public void UpdateAutoAttackTarget(float diff)
         {
             if (HasCrowdControl(CrowdControlType.DISARM) || HasCrowdControl(CrowdControlType.STUN))

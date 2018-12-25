@@ -78,15 +78,26 @@ namespace LeagueSandbox.GameServer.GameObjects.Spells
             }
 
             var stats = Owner.Stats;
-            if (SpellData.ManaCost[Level] * (1 - stats.SpellCostReduction) >= stats.CurrentMana ||
-                State != SpellState.STATE_READY)
-            {
-                return false;
-            }
+
 
             if (_game.Config.ManaCostsEnabled)
             {
-                stats.CurrentMana = stats.CurrentMana - SpellData.ManaCost[Level] * (1 - stats.SpellCostReduction);
+                if (stats.ManaPoints.Total == 5)
+                {
+                    stats.CurrentMana = stats.CurrentMana + 1;
+                    if(stats.CurrentMana + 1 == stats.ManaPoints.Total)
+                    {
+                        stats.CurrentMana = 0;
+                    }
+                }
+                else
+                {
+                    if (SpellData.ManaCost[Level] * (1 - stats.SpellCostReduction) >= stats.CurrentMana || State != SpellState.STATE_READY)
+                    {
+                        return false;
+                    }
+                    stats.CurrentMana = stats.CurrentMana - SpellData.ManaCost[Level] * (1 - stats.SpellCostReduction);
+                }
             }
 
             X = x;
