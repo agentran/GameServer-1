@@ -36,5 +36,7 @@ namespace GameServerCore.Domain.GameObjects
         void DashToTarget(ITarget t, float dashSpeed, float followTargetMaxDistance, float backDistance, float travelTime);
         Dictionary<string, IBuff> GetBuffs();
         void RemoveBuff(IBuff b);
+        void RemoveAABuff();
+        void AutoAttackBuff(float damageBuff, float forHowManyAA, DamageType type);
     }
 }

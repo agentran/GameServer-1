@@ -57,6 +57,10 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
         public bool IsMelee { get; set; }
         public bool IsDashing { get; protected set; }
 
+        private float AABuff;
+        private float forHowMany;
+        private DamageType typeAABuff;
+
         private Random _random = new Random();
 
         public ObjAiBase(Game game, string model, Stats.Stats stats, int collisionRadius = 40,
@@ -387,10 +391,35 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
 
             var onAutoAttack = _scriptEngine.GetStaticMethod<Action<IAttackableUnit, IAttackableUnit>>(Model, "Passive", "OnAutoAttack");
             onAutoAttack?.Invoke(this, target);
+            if (AABuff != 0)
+            {
+                for (int CurrectAA = 0; CurrectAA < forHowMany; CurrectAA++)
+                {
+                    target.TakeDamage(this, damage, DamageType.DAMAGE_TYPE_PHYSICAL,
+                       DamageSource.DAMAGE_SOURCE_ATTACK,
+                       _isNextAutoCrit);
+                    target.TakeDamage(this, AABuff, typeAABuff, DamageSource.DAMAGE_SOURCE_ATTACK, false);
+                }
 
-            target.TakeDamage(this, damage, DamageType.DAMAGE_TYPE_PHYSICAL,
-                DamageSource.DAMAGE_SOURCE_ATTACK,
-                _isNextAutoCrit);
+            }
+            else
+            {
+                target.TakeDamage(this, damage, DamageType.DAMAGE_TYPE_PHYSICAL,
+                   DamageSource.DAMAGE_SOURCE_ATTACK,
+                   _isNextAutoCrit);
+            }
+        }
+
+        public void AutoAttackBuff(float damageBuff, float forHowManyAA, DamageType type)
+        {
+            AABuff = damageBuff;
+            forHowMany = forHowManyAA;
+            typeAABuff = type;
+        }
+        public void RemoveAABuff()
+        {
+            AABuff = 0;
+            forHowMany = 0;
         }
 
         public void UpdateAutoAttackTarget(float diff)
@@ -425,7 +454,7 @@ namespace LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI
                 }
                 else if (IsAttacking && AutoAttackTarget != null)
                 {
-                    UpdateAAanimation();
+                    //UpdateAAanimation();
                     _autoAttackCurrentDelay += diff / 1000.0f;
                     if (_autoAttackCurrentDelay >= AutoAttackDelay / Stats.AttackSpeedMultiplier.Total)
                     {
